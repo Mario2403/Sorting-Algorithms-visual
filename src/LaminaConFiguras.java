@@ -27,14 +27,6 @@ public class LaminaConFiguras extends JPanel {
         }
 
 
-/*
-        Rectangle2D rectangulo = new Rectangle2D.Double(0, 0, 400, 400);
-        g2.setPaint(Color.BLACK);
-        g2.fill(rectangulo);
-        g2.setPaint(Color.GREEN);
-        g2.fill( new Rectangle2D.Double(20, 20, 25, 300));
-*/
-
 
 
 

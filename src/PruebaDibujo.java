@@ -1,29 +1,39 @@
 import java.awt.*;
 import javax.swing.*;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PruebaDibujo {
+    /*
+    * Valores recomendados:
+    *
+    * 400, 400, 32, 10
+    * 800, 800, 69, 10
+    * 800, 800, 129, 5
+    * 1300, 1000, 300, 3
+    *
+    *
+     */
+
+    private static final int TAMVENTANAX=1300;
+    private static final int TAMVENTANAY=1000;
+    private static final int NUMEROELEMENTOS=300;
+    private static final int ANCHOELEMENTOS=3;
 
 
     public static void main(String[] args) throws InterruptedException {
 
 
-        Elemento[] elementos=new Elemento[32];
+        Elemento[] elementos=new Elemento[NUMEROELEMENTOS];
 
-        generateRandomElements(elementos);
-        elementos.toString();
-
+        generateRandomElementsNoRepeatedOnes(elementos);
 
         MarcoConDibujos miMarco=new MarcoConDibujos();
-        miMarco.dibujaMarco();
-        miMarco.setVisible(true);
-        miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //miMarco.dibujaLamina(elementos);
+        miMarco.dibujaMarco(TAMVENTANAX, TAMVENTANAY);
 
+        AlgoritmosOrdenacion.mergeSort(elementos, miMarco);
 
-
-        ordenaInsercion(elementos, miMarco);
-         //miMarco.dibujaLamina(elementos);
 
         /*for (Elemento e: elementos
              ) {
@@ -33,12 +43,39 @@ public class PruebaDibujo {
 */
     }
 
-    private static void generateRandomElements(Elemento[] elementos) {
+    private static void generateRandomElementsNoRepeatedOnes(Elemento[] elementos) {
+
+        List<Integer> usados=new ArrayList<Integer>();
+
 
         for (int i = 0; i <elementos.length ; i++) {
-            int k= (int) (Math.random()*elementos.length);
 
-            elementos[i]=new Elemento(k, 10+i + i*10 , 325-10*k, 10, 10*k);
+            int k;
+            do{
+                 k=  (int)(Math.random()*elementos.length+1);
+            }while(usados.contains((Integer)k));
+
+
+
+            elementos[i]=new Elemento(k, ANCHOELEMENTOS+i + i*ANCHOELEMENTOS , TAMVENTANAY-75-ANCHOELEMENTOS*k, ANCHOELEMENTOS, ANCHOELEMENTOS*k);
+            usados.add(k);
+        }
+
+
+
+    }
+
+    private static void generateRandomElementsRepeated(Elemento[] elementos) {
+
+
+
+
+        for (int i = 0; i <elementos.length ; i++) {
+
+               int k=  (int)(Math.random()*elementos.length+1);
+
+
+            elementos[i]=new Elemento(k, ANCHOELEMENTOS+i + i*ANCHOELEMENTOS , TAMVENTANAY-75-ANCHOELEMENTOS*k, ANCHOELEMENTOS, ANCHOELEMENTOS*k);
 
         }
 
@@ -47,56 +84,7 @@ public class PruebaDibujo {
     }
 
 
-    public static void ordenaInsercion (Elemento[] vector, MarcoConDibujos miMarco) throws InterruptedException {
 
-        for (int i = 0; i < vector.length -1; i++) {
-
-
-
-            int k = i;
-            for (int j = i + 1; j < vector.length; j++) {
-                if (vector[j].getForma().height < vector[k].getForma().height) {
-                    k = j;
-                }
-
-            }
-                int auxHeight= (int) vector[i].getForma().height;
-                int auxY= (int) vector[i].getForma().y;
-
-                vector[i].getForma().height=vector[k].getForma().height;
-                vector[i].getForma().y=vector[k].getForma().y;
-
-                vector[k].getForma().height = auxHeight;
-                vector[k].getForma().y = auxY;
-                miMarco.dibujaLamina(vector);
-                Thread.sleep(500);
-                //miMarco.setVisible(false);
-                //miMarco.setVisible(true);
-                miMarco.repaint();
-                
-        }
-    }
-
-
-
-
-/*
-            while	(k>0	&&	vector[k-1].getForma().height>aux)	{
-
-                vector[k].getForma().y=vector[k-1].getForma().y;
-                //vector[k].getForma().width=vector[k-1].getForma().width;
-                vector[k].getForma().height=vector[k-1].getForma().height;
-                k--;
-            }
-            vector[k].getForma().y=auxElem.getForma().y;
-            //vector[k].getForma().width=auxElem.getForma().width;
-            vector[k].getForma().height=auxElem.getForma().height;
-
-            //miMarco.dibujaLamina(vector);
-            //Thread.sleep(1000);
-
-        }
-    }*/
 }
 
 

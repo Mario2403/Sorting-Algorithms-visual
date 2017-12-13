@@ -7,10 +7,12 @@ public class MarcoConDibujos extends JFrame {
 
 
 
-    public void dibujaMarco(){
+    public void dibujaMarco(int tamX, int tamY){
 
         setTitle("Dibujos!");
-        setSize(400, 400);
+        setSize(tamX, tamY);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void dibujaLamina(Elemento[] elementos){
