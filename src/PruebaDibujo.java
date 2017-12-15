@@ -1,49 +1,46 @@
-import java.awt.*;
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class PruebaDibujo {
-    /*
-    * Valores recomendados:
-    *
-    * 400, 400, 32, 10
-    * 800, 800, 69, 10
-    * 800, 800, 129, 5
-    * 1300, 1000, 300, 3
-    *
-    *
-     */
 
-    private static final int TAMVENTANAX=1300;
-    private static final int TAMVENTANAY=1000;
-    private static final int NUMEROELEMENTOS=300;
-    private static final int ANCHOELEMENTOS=3;
+    private int tamanoventanaX;
+    private int tamanoventanaY;
+    private int anchoElementos;
+    private Elemento[] elementos;
 
-
-    public static void main(String[] args) throws InterruptedException {
-
-
-        Elemento[] elementos=new Elemento[NUMEROELEMENTOS];
-
-        generateRandomElementsNoRepeatedOnes(elementos);
-
-        MarcoConDibujos miMarco=new MarcoConDibujos();
-        miMarco.dibujaMarco(TAMVENTANAX, TAMVENTANAY);
-
-        AlgoritmosOrdenacion.mergeSort(elementos, miMarco);
-
-
-        /*for (Elemento e: elementos
-             ) {
-            System.out.println("x: "+e.getForma().x +  " y:" + e.getForma().y + " h:" + e.getForma().height + " k:" + e.getValor());
-
-        }
-*/
+    public PruebaDibujo(int tamanoventanaX, int tamanoventanaY, int anchoElementos, Elemento[] elementos) {
+        this.tamanoventanaX = tamanoventanaX;
+        this.tamanoventanaY = tamanoventanaY;
+        this.anchoElementos = anchoElementos;
+        this.elementos = elementos;
     }
 
-    private static void generateRandomElementsNoRepeatedOnes(Elemento[] elementos) {
+
+    public void run() throws InterruptedException {
+        MarcoConOpciones marcoOpc = new MarcoConOpciones(800, 600);
+        marcoOpc.dibujaMarcoOpc();
+        marcoOpc.opciones();
+
+
+
+
+
+
+
+
+        /*generateRandomElementsNoRepeatedOnes(elementos);
+
+        MarcoConDibujos miMarco=new MarcoConDibujos();
+        miMarco.dibujaMarcoDib(tamanoventanaX, tamanoventanaY);
+
+        AlgoritmosOrdenacion.mergeSort(elementos, miMarco);
+        */
+
+    }
+
+
+    private void generateRandomElementsNoRepeatedOnes(Elemento[] elementos) {
 
         List<Integer> usados=new ArrayList<Integer>();
 
@@ -57,7 +54,7 @@ public class PruebaDibujo {
 
 
 
-            elementos[i]=new Elemento(k, ANCHOELEMENTOS+i + i*ANCHOELEMENTOS , TAMVENTANAY-75-ANCHOELEMENTOS*k, ANCHOELEMENTOS, ANCHOELEMENTOS*k);
+            elementos[i]=new Elemento(k, anchoElementos+i + i*anchoElementos , tamanoventanaY -75-anchoElementos*k, anchoElementos, anchoElementos*k);
             usados.add(k);
         }
 
@@ -65,7 +62,7 @@ public class PruebaDibujo {
 
     }
 
-    private static void generateRandomElementsRepeated(Elemento[] elementos) {
+    private void generateRandomElementsRepeated(Elemento[] elementos) {
 
 
 
@@ -75,7 +72,7 @@ public class PruebaDibujo {
                int k=  (int)(Math.random()*elementos.length+1);
 
 
-            elementos[i]=new Elemento(k, ANCHOELEMENTOS+i + i*ANCHOELEMENTOS , TAMVENTANAY-75-ANCHOELEMENTOS*k, ANCHOELEMENTOS, ANCHOELEMENTOS*k);
+            elementos[i]=new Elemento(k, anchoElementos+i + i*anchoElementos , tamanoventanaY -75-anchoElementos*k, anchoElementos, anchoElementos*k);
 
         }
 

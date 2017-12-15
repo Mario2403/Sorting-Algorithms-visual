@@ -7,7 +7,7 @@ public class MarcoConDibujos extends JFrame {
 
 
 
-    public void dibujaMarco(int tamX, int tamY){
+    public void dibujaMarcoDib(int tamX, int tamY){
 
         setTitle("Dibujos!");
         setSize(tamX, tamY);
