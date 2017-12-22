@@ -9,9 +9,13 @@ import java.awt.event.ActionListener;
 public class LaminaColorChooser extends JPanel implements ChangeListener {
 
 
-    JColorChooser jcc;
+    private Mensajero mensajero;
+    private JColorChooser jcc;
 
-    public LaminaColorChooser(Color color) {
+    public LaminaColorChooser(Color color, Mensajero mensajero) {
+
+        this.mensajero=mensajero;
+
         setBounds(20, 100, 650, 350);
         setBackground(color);
         setLayout(new BorderLayout());
@@ -34,7 +38,8 @@ public class LaminaColorChooser extends JPanel implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         Color nuevoColor = jcc.getColor();
-        System.out.println(nuevoColor.toString());
+        mensajero.setColorElem(nuevoColor);
+
     }
 }
 

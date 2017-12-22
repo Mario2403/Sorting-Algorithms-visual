@@ -4,16 +4,25 @@ public class AlgoritmosOrdenacion {
 
 
 
-    public static void dibujaYDuerme(MarcoConDibujos miMarco, Elemento[] vector) throws InterruptedException{
+    private static void dibujaYDuerme(MarcoConDibujos miMarco, Elemento[] vector,  Mensajero mensajero) {
 
-        miMarco.dibujaLamina(vector);
-        Thread.sleep(10);
+
+            miMarco.dibujaLamina(vector, mensajero);
+            LaminaConFiguras lam = new LaminaConFiguras(vector, mensajero);
+            miMarco.add(lam);
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         miMarco.repaint();
+
+
     }
 
 
 
-    public static void seleccion (Elemento[] vector, MarcoConDibujos miMarco) throws InterruptedException {
+    public static void seleccion (Elemento[] vector, MarcoConDibujos miMarco, Mensajero mensajero)   {
 
         for (int i = 0; i < vector.length -1; i++) {
 
@@ -29,13 +38,14 @@ public class AlgoritmosOrdenacion {
 
             vector[i].intercambiaCon(vector[k]);
 
-            dibujaYDuerme(miMarco, vector);
+            dibujaYDuerme(miMarco, vector, mensajero);
+
 
         }
     }
 
 
-    public static void insercion(Elemento[] vector, MarcoConDibujos miMarco) throws InterruptedException{
+    public static void insercion(Elemento[] vector, MarcoConDibujos miMarco, Mensajero mensajero)  {
 
 
         for	(int i=1;	i<vector.length;	i++)	{
@@ -45,7 +55,7 @@ public class AlgoritmosOrdenacion {
                 if(vector[j].getForma().height<vector[j-1].getForma().height){
                     vector[j].intercambiaCon(vector[j-1]);
 
-                    dibujaYDuerme(miMarco, vector);
+                    dibujaYDuerme(miMarco, vector, mensajero);
 
                 }
             }
@@ -59,7 +69,7 @@ public class AlgoritmosOrdenacion {
     }
 
 
-    public static void burbuja(Elemento[] vector, MarcoConDibujos miMarco) throws InterruptedException {
+    public static void burbuja(Elemento[] vector, MarcoConDibujos miMarco, Mensajero mensajero)   {
 
 
         int temp = 0;
@@ -69,7 +79,7 @@ public class AlgoritmosOrdenacion {
 
                 if (vector[j - 1].getForma().height > vector[j].getForma().height) {
                     vector[j].intercambiaCon(vector[j-1]);
-                    dibujaYDuerme(miMarco, vector);
+                    dibujaYDuerme(miMarco, vector, mensajero);
                 }
 
             }
@@ -78,7 +88,7 @@ public class AlgoritmosOrdenacion {
 
 
 
-    public static void combSort	(Elemento[]	vector, MarcoConDibujos miMarco) throws InterruptedException {
+    public static void combSort	(Elemento[]	vector, MarcoConDibujos miMarco, Mensajero mensajero)   {
 
         boolean ordenado=false;
         int gap=vector.length-1;
@@ -88,7 +98,7 @@ public class AlgoritmosOrdenacion {
             while	(i+gap<vector.length)	{
                 if	(vector[i].getForma().height>vector[i+gap].getForma().height)	{
                     vector[i].intercambiaCon(vector[i+gap]);
-                    dibujaYDuerme(miMarco, vector);
+                    dibujaYDuerme(miMarco, vector, mensajero);
                     ordenado=false;
                 }
                 i++;
@@ -98,7 +108,7 @@ public class AlgoritmosOrdenacion {
     }
 
 
-    public static void heapSort(Elemento[] vector, MarcoConDibujos miMarco) throws InterruptedException {
+    public static void heapSort(Elemento[] vector, MarcoConDibujos miMarco, Mensajero mensajero)   {
 
         int n = vector.length;
 
@@ -110,7 +120,7 @@ public class AlgoritmosOrdenacion {
         for (int i = n - 1; i >= 0; i--) {
             // Move current root to end
             vector[0].intercambiaCon(vector[i]);
-            dibujaYDuerme(miMarco, vector);
+            dibujaYDuerme(miMarco, vector, mensajero);
 
             // call max heapify on the reduced heap
             heapify(vector, i, 0);
@@ -143,26 +153,26 @@ public class AlgoritmosOrdenacion {
         }
     }
 
-    public static void	quickSort(Elemento[]	vector, MarcoConDibujos miMarco) throws InterruptedException {
+    public static void	quickSort(Elemento[]	vector, MarcoConDibujos miMarco, Mensajero mensajero)   {
 
-        quickSortAux(vector,0,vector.length-1, miMarco);
+        quickSortAux(vector,0,vector.length-1, miMarco, mensajero);
 
 
     }
 
-    private static void	quickSortAux (Elemento[]	vector,	int	i0,	int	iN, MarcoConDibujos miMarco) throws InterruptedException {
+    private static void	quickSortAux (Elemento[]	vector,	int	i0,	int	iN, MarcoConDibujos miMarco, Mensajero mensajero)   {
         if	(i0	>=	iN)
             return;
         else	{
-            int	m	=	ordenarPorPivote(vector,	i0,	iN, miMarco);
-            quickSortAux(vector, i0, m-1, miMarco);
-            quickSortAux(vector,m+1,	iN, miMarco);
+            int	m	=	ordenarPorPivote(vector,	i0,	iN, miMarco, mensajero);
+            quickSortAux(vector, i0, m-1, miMarco, mensajero);
+            quickSortAux(vector,m+1,	iN, miMarco, mensajero);
 
         }
     }
 
 
-    private static int ordenarPorPivote	(Elemento[]	vector,	int	i0, int iN, MarcoConDibujos miMarco) throws InterruptedException {
+    private static int ordenarPorPivote	(Elemento[]	vector,	int	i0, int iN, MarcoConDibujos miMarco, Mensajero mensajero)   {
         Elemento pivote	=	vector[iN].clone();
         int i=i0;
         int j=iN-1;
@@ -172,13 +182,13 @@ public class AlgoritmosOrdenacion {
             while	(vector[j].getForma().height>	pivote.getForma().height	&&	i<j)	{j--;}
 
             vector[i].intercambiaCon(vector[j]);
-            dibujaYDuerme(miMarco, vector);
+            dibujaYDuerme(miMarco, vector, mensajero);
         }
         if	(vector[i].getForma().height	>	pivote.getForma().height)	{
             vector[iN].intercambiaCon(vector[i]);
             vector[i].intercambiaCon(pivote);
 
-            dibujaYDuerme(miMarco, vector);
+            dibujaYDuerme(miMarco, vector, mensajero);
 
             return	i;
         }
@@ -189,7 +199,7 @@ public class AlgoritmosOrdenacion {
 
 
 
-    private static void	merge(Elemento[]	vector,	int	i0, int k,	int iN, MarcoConDibujos miMarco) throws InterruptedException {
+    private static void	merge(Elemento[]	vector,	int	i0, int k,	int iN, MarcoConDibujos miMarco, Mensajero mensajero)   {
         int i=i0;	int d=k+1;
 
         Elemento[]	aux=new	Elemento[iN-i0+1];
@@ -214,25 +224,25 @@ public class AlgoritmosOrdenacion {
         for	(int a=d;	a<=iN;	a++)	{aux[f]=vector[a].clone();	f++;}
         for	(int a=0;	a<aux.length;	a++)	{
             vector[i0+a].intercambiaCon(aux[a]);
-            dibujaYDuerme(miMarco, vector);
+            dibujaYDuerme(miMarco, vector, mensajero);
         }
     }
 
 
 
-    private static void	mergeSortAux	(Elemento[]	vector,	int	i0, int iN, MarcoConDibujos miMarco) throws InterruptedException {
+    private static void	mergeSortAux	(Elemento[]	vector,	int	i0, int iN, MarcoConDibujos miMarco, Mensajero mensajero)   {
         if	(i0	>=	iN)
             return;
         else	{
             int k=	(i0	+	iN)	/2;
-            mergeSortAux(vector, i0, k, miMarco);
-            mergeSortAux(vector, k+1,	iN, miMarco);
-            merge(vector,	i0,	k,	iN, miMarco);
+            mergeSortAux(vector, i0, k, miMarco, mensajero);
+            mergeSortAux(vector, k+1,	iN, miMarco, mensajero);
+            merge(vector,	i0,	k,	iN, miMarco, mensajero);
         }
     }
 
-    public static void mergeSort(Elemento[]	vector, MarcoConDibujos miMarco) throws InterruptedException {
-        mergeSortAux(vector,0,	vector.length-1, miMarco);
+    public static void mergeSort(Elemento[]	vector, MarcoConDibujos miMarco, Mensajero mensajero)   {
+        mergeSortAux(vector,0,	vector.length-1, miMarco, mensajero);
     }
 
 

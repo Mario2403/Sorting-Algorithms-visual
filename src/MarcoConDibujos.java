@@ -12,13 +12,18 @@ public class MarcoConDibujos extends JFrame {
         setTitle("Dibujos!");
         setSize(tamX, tamY);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
     }
 
-    public void dibujaLamina(Elemento[] elementos){
-
-        LaminaConFiguras lamina1=new LaminaConFiguras(elementos);
+    public void dibujaLamina(Elemento[] elementos, Mensajero mensajero){
+        LaminaConFiguras lamina1 =new LaminaConFiguras(elementos, mensajero);
         add(lamina1);
+
+
+
+
     }
 
 

@@ -21,9 +21,9 @@ public class App {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Elemento[] elementos=new Elemento[NUMEROELEMENTOS];
 
-        PruebaDibujo ordenaVisual=new PruebaDibujo(TAMVENTANAX, TAMVENTANAY, ANCHOELEMENTOS, elementos);
+
+        PruebaDibujo ordenaVisual=new PruebaDibujo(TAMVENTANAX, TAMVENTANAY, ANCHOELEMENTOS);
 
         ordenaVisual.run();
 

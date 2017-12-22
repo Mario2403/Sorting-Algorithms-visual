@@ -2,15 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LaminaBotones extends JPanel implements ActionListener{
     private JButton aceptar;
     private JButton cancelar;
+    private MarcoConOpciones marcoConOpciones;
+    private Mensajero mensajero;
+
+    private Elemento[] elementos;
+
+    public LaminaBotones(Color color, Mensajero mensajero, MarcoConOpciones marcoConOpciones) {
 
 
-    public LaminaBotones(Color color) {
+        this.mensajero=mensajero;
 
-        setBounds(500, 525, 400, 300);
+        this.marcoConOpciones=marcoConOpciones;
+        setBounds(380, 525, 400, 300);
         //setSize(200, 200);
         setBackground(color);
         //setLayout(null);
@@ -32,10 +41,19 @@ public class LaminaBotones extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==aceptar){
-            System.out.println("Aceptar");
+
+            marcoConOpciones.setVisible(false);
+            mensajero.setComienza(true);
+
+
+
         }
         if (e.getSource()==cancelar){
-            System.out.println("Cancelar");
+            System.exit(0);
         }
     }
+
+
+
+
 }

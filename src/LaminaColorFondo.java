@@ -7,5 +7,6 @@ public class LaminaColorFondo extends JPanel{
         setLayout(null);
         setSize(tamX, tamY);
         setBackground(color);
+
     }
 }
