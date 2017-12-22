@@ -7,7 +7,7 @@ import java.awt.event.ItemListener;
 public class LaminaSeleccion extends JPanel implements ItemListener{
 
     private Mensajero mensajero;
-    private JComboBox<String> cb;
+    private JComboBox<String> cb = new JComboBox<>();
 
     public LaminaSeleccion(Color color, Mensajero mensajero){
 
@@ -18,11 +18,22 @@ public class LaminaSeleccion extends JPanel implements ItemListener{
         setBackground(color);
         setBorder(BorderFactory.createTitledBorder("Selecciona un Algoritmo"));
 
+        creaJComboBox();
+        creaEspacios();
+
+    }
+
+    private void creaEspacios(){
+        add(Box.createRigidArea(new Dimension(0, 5)), BorderLayout.SOUTH);
+        add(Box.createRigidArea(new Dimension(5, 0)), BorderLayout.WEST);
+        add(Box.createRigidArea(new Dimension(5, 0)), BorderLayout.EAST);
+        add(Box.createRigidArea(new Dimension(0, 5)), BorderLayout.NORTH);
+
+    }
 
 
-        JColorChooser jcc=new JColorChooser(Color.WHITE);
+    private void creaJComboBox(){
 
-        cb=new JComboBox<String>();
         cb.addItem("Inserción");
         cb.addItem("Selección");
         cb.addItem("Burbuja");
@@ -33,17 +44,7 @@ public class LaminaSeleccion extends JPanel implements ItemListener{
         cb.setBackground(Color.WHITE);
         cb.addItemListener(this);
         cb.setToolTipText("Elige el algoritmo de ordenación a utilizar");
-
-
-
-
-
         add(cb, BorderLayout.CENTER);
-        add(Box.createRigidArea(new Dimension(0, 5)), BorderLayout.SOUTH);
-        add(Box.createRigidArea(new Dimension(5, 0)), BorderLayout.WEST);
-        add(Box.createRigidArea(new Dimension(5, 0)), BorderLayout.EAST);
-        add(Box.createRigidArea(new Dimension(0, 5)), BorderLayout.NORTH);
-
 
     }
 

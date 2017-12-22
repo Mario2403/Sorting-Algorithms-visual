@@ -4,81 +4,68 @@ import java.util.List;
 
 public class PruebaDibujo extends Waiting {
 
-    private int tamanoventanaX;
-    private int tamanoventanaY;
-    private int anchoElementos;
-    private Mensajero mensajero;
+
+    private Mensajero mensajero= new Mensajero();
+    private Elemento[] elementos;
+    private LaminaTimer timer;
+    private MarcoConDibujos marcoConDibujos;
 
 
-    public PruebaDibujo(int tamanoventanaX, int tamanoventanaY, int anchoElementos) {
-        this.tamanoventanaX = tamanoventanaX;
-        this.tamanoventanaY = tamanoventanaY;
-        this.anchoElementos = anchoElementos;
+    void run()  {
+
+        creaMarcoOpciones();
+        generaElementos();
+
+        try {
+        waitUntil(0, 1, "Ya");  //Espera a que se pulse el boton aceptar
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        creaMarcoDibujo();
+        creaTemporizador(marcoConDibujos);
+        algoritmoElegidoStart(elementos, marcoConDibujos);
+        timer.getTimer().stop();
+
 
     }
 
+    private void creaMarcoDibujo(){
 
-    public void run() throws InterruptedException {
-        mensajero = new Mensajero();
 
+        marcoConDibujos = new MarcoConDibujos();
+        marcoConDibujos.dibujaMarcoDib(mensajero.getTamanoX(), mensajero.getTamanoY());
+        marcoConDibujos.dibujaLamina(elementos, mensajero);
+
+    }
+
+    private void creaMarcoOpciones(){
 
         MarcoConOpciones marcoOpc = new MarcoConOpciones(700, 600);
         marcoOpc.dibujaMarcoOpc();
         marcoOpc.opciones(mensajero);
 
+    }
 
+    private void creaTemporizador(MarcoConDibujos marcoConDibujos){
 
+        timer=new LaminaTimer(mensajero.getTamanoY()-75);
 
-        try {
-            waitUntil(0, 1, "Ya") ;
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (mensajero.isTemporizador()){
+            marcoConDibujos.add(timer);
         }
 
-        Elemento[] elementos = new Elemento[mensajero.getNumElem()];
+    }
+
+    private void generaElementos(){
+        elementos = new Elemento[mensajero.getNumElem()];
 
         if(mensajero.isRepetidos()){
             generateRandomElementsRepeated(elementos);
         }else {
             generateRandomElementsNoRepeatedOnes(elementos);
         }
-
-        MarcoConDibujos mar = new MarcoConDibujos();
-
-        mar.dibujaMarcoDib(mensajero.getTamanoX(), mensajero.getTamanoY());
-        mar.dibujaLamina(elementos, mensajero);
-        LaminaTimer timer=new LaminaTimer(mensajero.getTamanoY()-75);
-
-        if (mensajero.isTemporizador()){
-
-            mar.add(timer);
-        }
-
-        algoritmoElegidoStart(elementos, mar);
-
-        timer.getTimer().stop();
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        generateRandomElementsNoRepeatedOnes(elementos);
-
-        MarcoConDibujos miMarco=new MarcoConDibujos();
-        miMarco.dibujaMarcoDib(tamanoventanaX, tamanoventanaY);
-
-        AlgoritmosOrdenacion.mergeSort(elementos, miMarco);
-*/
 
     }
 
@@ -107,7 +94,7 @@ public class PruebaDibujo extends Waiting {
 
     private void generateRandomElementsNoRepeatedOnes(Elemento[] elementos) {
 
-        List<Integer> usados=new ArrayList<Integer>();
+        List<Integer> usados= new ArrayList<>();
 
 
         for (int i = 0; i <elementos.length ; i++) {
@@ -115,7 +102,7 @@ public class PruebaDibujo extends Waiting {
             int k;
             do{
                 k=  (int)(Math.random()*elementos.length+1);
-            }while(usados.contains((Integer)k));
+            }while(usados.contains(k));
 
 
 

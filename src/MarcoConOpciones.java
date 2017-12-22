@@ -6,7 +6,8 @@ public class MarcoConOpciones extends JFrame{
 
     private int tamX;
     private int tamY;
-    private Mensajero mensajero;
+    private LaminaColorFondo colorFondo;
+    private Color fondo=new Color(238, 238, 238);
 
 
     public MarcoConOpciones(int tamX, int tamY) {
@@ -26,53 +27,58 @@ public class MarcoConOpciones extends JFrame{
 
     public void opciones(Mensajero mensajero){
 
-        this.mensajero=mensajero;
 
 
-        Color fondo=new Color(238, 238, 238);
-        LaminaColorFondo colorFondo=new LaminaColorFondo(tamX, tamY, fondo);
+
+       colorFondo=new LaminaColorFondo(tamX, tamY, fondo);
+
+       crearLaminaBotones(mensajero);
+       crearLaminaCheckBoxes(mensajero);
+       crearLaminaColorChooser(mensajero);
+       crearLaminaSelector(mensajero);
+       crearLaminaRecomendaciones();
+       crearLaminaCopyright();
+       crearLaminaTextFields(mensajero);
+       setContentPane(colorFondo);
+    }
+
+    private void crearLaminaBotones(Mensajero mensajero){
         LaminaBotones botones = new LaminaBotones(fondo, mensajero, this);
-        LaminaSeleccion selector = new LaminaSeleccion(Color.WHITE, mensajero);
-        LaminaColorChooser colorChooser= new LaminaColorChooser(Color.WHITE, mensajero);
-        LaminaCheckBoxes checkBoxes = new LaminaCheckBoxes(Color.WHITE, mensajero);
-        LaminaTextFields textFields = new LaminaTextFields(Color.WHITE, mensajero);
-        LaminaRecomendaciones recomendaciones= new LaminaRecomendaciones(fondo);
-        //LaminaTimer timer= new LaminaTimer();
-        //colorFondo.add(timer);
-
-
-        colorFondo.add(recomendaciones);
-        try {
-            LaminaCopyright copyright = new LaminaCopyright(fondo);
-            colorFondo.add(copyright);
-        }
-        catch(URISyntaxException er){
-            System.out.println("Error en la URL");
-        }
-
-        colorFondo.add(textFields);
-        colorFondo.add(checkBoxes);
-        colorFondo.add(colorChooser);
-        colorFondo.add(selector);
         colorFondo.add(botones);
-        setContentPane(colorFondo);
 
 
-       //colorFondo.add(selector);
+    }
+    private void crearLaminaSelector(Mensajero mensajero){
+        LaminaSeleccion selector = new LaminaSeleccion(Color.WHITE, mensajero);
+        colorFondo.add(selector);
+    }
 
+    private void crearLaminaTextFields(Mensajero mensajero){
+        LaminaTextFields textFields = new LaminaTextFields(Color.WHITE, mensajero);
+        colorFondo.add(textFields);
 
+    }
 
-
-
-
-
-
-
-
+    private void crearLaminaColorChooser(Mensajero mensajero){
+        LaminaColorChooser colorChooser= new LaminaColorChooser(Color.WHITE, mensajero);
+        colorFondo.add(colorChooser);
 
 
     }
 
+    private void crearLaminaCheckBoxes(Mensajero mensajero){
+        LaminaCheckBoxes checkBoxes = new LaminaCheckBoxes(Color.WHITE, mensajero);
+        colorFondo.add(checkBoxes);
 
 
+    }
+    private void crearLaminaRecomendaciones(){
+        LaminaRecomendaciones recomendaciones= new LaminaRecomendaciones(fondo);
+        colorFondo.add(recomendaciones);
+    }
+
+    private void crearLaminaCopyright(){
+        LaminaCopyright copyright = new LaminaCopyright(fondo);
+        colorFondo.add(copyright);
+    }
 }

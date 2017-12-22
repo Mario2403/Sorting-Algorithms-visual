@@ -9,11 +9,10 @@ import java.net.URISyntaxException;
 
 public class LaminaCopyright extends JPanel implements ActionListener {
 
-    final URI uri;
+    private URI uri;
 
-    public LaminaCopyright(Color color) throws URISyntaxException {
 
-            uri = new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    public LaminaCopyright(Color color)  {
 
 
         setBounds(384, 450, 500, 60);
@@ -21,10 +20,19 @@ public class LaminaCopyright extends JPanel implements ActionListener {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setAlignmentX(RIGHT_ALIGNMENT);
 
-       JLabel copy =new JLabel("© 2017 MARIO JURADO SOBA ALL RIGHTS RESERVED", JLabel.LEFT);
-       copy.setFont(new Font("Verdana", Font.ITALIC, 10));
-       copy.setForeground(new Color(114, 114, 114));
-       add(copy);
+        try {
+            uri = new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        creaJLabel();
+
+        creaBoton();
+
+
+    }
+
+    private void creaBoton(){
 
         JButton button = new JButton();
         button.setText("                                             Más información");
@@ -36,14 +44,15 @@ public class LaminaCopyright extends JPanel implements ActionListener {
         button.setToolTipText(uri.toString());
         button.addActionListener(this);
         add(button);
+    }
+
+    private void creaJLabel(){
 
 
-
-
-
-
-
-
+        JLabel copy =new JLabel("© 2017 MARIO JURADO SOBA ALL RIGHTS RESERVED", JLabel.LEFT);
+        copy.setFont(new Font("Verdana", Font.ITALIC, 10));
+        copy.setForeground(new Color(114, 114, 114));
+        add(copy);
 
     }
 

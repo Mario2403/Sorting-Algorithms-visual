@@ -1,14 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class LaminaCheckBoxes extends JPanel implements ItemListener {
 
-    private JCheckBox repetidos;
-    private JCheckBox tiempo;
+    private JCheckBox repetidos = new JCheckBox("Elementos repetidos");;
+    private JCheckBox tiempo = new JCheckBox("Mostrar tiempo transcurido");
     private Mensajero mensajero;
 
 
@@ -21,11 +19,17 @@ public class LaminaCheckBoxes extends JPanel implements ItemListener {
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         setBorder( BorderFactory.createTitledBorder("Opciones"));
 
+        creaCheckBoxes(color);
 
-        repetidos = new JCheckBox("Elementos repetidos");
+
+    }
+
+    private void creaCheckBoxes(Color color){
+
         repetidos.setBackground(color);
         repetidos.setToolTipText("Determina si pueden existir elementos del mismo tamaño");
-        tiempo = new JCheckBox("Mostrar tiempo transcurido");
+
+
         tiempo.setBackground(color);
         tiempo.setToolTipText("Muestra un temporizador con el tiempo transcurrido");
 
@@ -36,6 +40,7 @@ public class LaminaCheckBoxes extends JPanel implements ItemListener {
         add(repetidos);
         add(Box.createRigidArea(new Dimension(5, 0)));
         add(tiempo);
+
 
     }
 

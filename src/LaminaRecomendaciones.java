@@ -5,23 +5,25 @@ import java.awt.event.ActionListener;
 
 public class LaminaRecomendaciones extends JPanel implements ActionListener {
 
-    private JButton recomienda;
+    private JButton recomienda=new JButton("Tips");
 
     public LaminaRecomendaciones(Color color){
 
         setBounds(360, 490, 58, 25);
         setLayout(new GridLayout(1, 1));
         setBackground(color);
+        creaBoton();
+    }
 
+    private void creaBoton(){
 
-        recomienda=new JButton("Tips");
         recomienda.setFont(new Font("Dialog", Font.BOLD, 12 ));
         add(recomienda);
         recomienda.addActionListener(this);
 
-
-
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

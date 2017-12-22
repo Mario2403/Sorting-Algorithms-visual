@@ -20,8 +20,6 @@ public class Mensajero {
         this.comienza = comienza;
     }
 
-
-
     public int getAlgoritmo() {
         return algoritmo;
     }

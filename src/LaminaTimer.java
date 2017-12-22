@@ -13,17 +13,23 @@ public class LaminaTimer extends JPanel implements ActionListener {
         return timer;
     }
 
-    private Timer timer;
+    private Timer timer=new Timer(1, this);
 
     public LaminaTimer( int posY){
 
         setBounds(20, posY, 110, 20);
-        tiempo=new JLabel("");
-        //setBackground(Color.lightGray);
+        creaTimer();
 
-        timer=new Timer(1, this);
+    }
+
+
+    private void creaTimer(){
+
+        tiempo=new JLabel("");
         timer.start();
         add(tiempo);
+
+
     }
 
     @Override

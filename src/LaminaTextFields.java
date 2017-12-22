@@ -25,38 +25,55 @@ public class LaminaTextFields extends JPanel implements ActionListener {
         setLayout(new GridLayout(0,2));
         setBorder(BorderFactory.createTitledBorder("Elementos"));
 
+        creaNumElem();
+        creaAnchoElem();
+        creaTamX();
+        creaTamY();
+
+    }
+
+    private void creaNumElem(){
         JLabel numElem = new JLabel("Numero de elementos");
         numeroElementos= new JTextField("32");
         numeroElementos.setToolTipText("Pulsa ENTER para guardar el dato");
-        JLabel ancho = new JLabel("Ancho elementos");
-        anchoElementos=new JTextField("10");
-        anchoElementos.setToolTipText("Pulsa ENTER para guardar el dato");
-        JLabel tamX=new JLabel("Tamaño ventana x");
-        tamanoX=new JTextField("400");
-        tamanoX.setToolTipText("Pulsa ENTER para guardar el dato");
-        JLabel tamY = new JLabel("Tamaño ventana y");
-        tamanoY = new JTextField("400");
-        tamanoY.setToolTipText("Pulsa ENTER para guardar el dato");
-
         numeroElementos.addActionListener(this);
-        anchoElementos.addActionListener(this);
-        tamanoX.addActionListener(this);
-        tamanoY.addActionListener(this);
-
-
-
 
         add(numElem);
         add(numeroElementos);
+
+
+    }
+    private void creaAnchoElem(){
+
+        JLabel ancho = new JLabel("Ancho elementos");
+        anchoElementos=new JTextField("10");
+        anchoElementos.setToolTipText("Pulsa ENTER para guardar el dato");
+        anchoElementos.addActionListener(this);
+
         add(ancho);
         add(anchoElementos);
+
+    }
+    private void creaTamX(){
+        JLabel tamX=new JLabel("Tamaño ventana x");
+        tamanoX=new JTextField("400");
+        tamanoX.setToolTipText("Pulsa ENTER para guardar el dato");
+        tamanoX.addActionListener(this);
+
         add(tamX);
         add(tamanoX);
+
+    }
+    private void creaTamY(){
+
+
+        JLabel tamY = new JLabel("Tamaño ventana y");
+        tamanoY = new JTextField("400");
+        tamanoY.setToolTipText("Pulsa ENTER para guardar el dato");
+        tamanoY.addActionListener(this);
+
         add(tamY);
         add(tamanoY);
-
-
-
     }
 
     @Override

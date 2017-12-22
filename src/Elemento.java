@@ -7,10 +7,6 @@ public class Elemento {
     private int valor;
     private Rectangle2D.Double forma;
 
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
     public Elemento(int valor, double posX, double posY, double ancho, double alto){
 
         this.forma=new Rectangle2D.Double(posX, posY, ancho, alto);
@@ -45,7 +41,7 @@ public class Elemento {
     }
 
     @Override
-    protected Elemento clone() {
+    protected Elemento clone()  {
 
         return new Elemento(this.valor, this.forma.x, this.forma.y, this.forma.width, this.forma.height);
     }
